@@ -5,7 +5,7 @@ import { Zone } from "src/zone/zone.schema";
 export class CreateEventDto{
     beginingdate:Date;
     endingdate:Date;
-    zone: mongoose.Schema.Types.ObjectId
-    benevoles:[ mongoose.Schema.Types.ObjectId]
+    zone: Zone
+    benevoles:[Benevole]
 }
 

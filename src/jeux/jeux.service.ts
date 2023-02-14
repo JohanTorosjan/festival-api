@@ -1,15 +1,12 @@
 import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { isValidObjectId, Model } from 'mongoose';
-import { Zone,ZoneDocument } from 'src/zone/zone.schema';
-import { addZoneDto } from './addzone.jeux.dto';
 import { CreateJeuxDto } from './create.jeux.dto';
 import { Jeux, JeuxDocument } from './jeux.schema';
 
 @Injectable()
 export class JeuxService {
-    constructor(@InjectModel(Jeux.name) private readonly jeuxModel:Model<JeuxDocument>,
-    @InjectModel(Zone.name) private readonly zoneModel:Model<ZoneDocument>
+    constructor(@InjectModel(Jeux.name) private readonly jeuxModel:Model<JeuxDocument>
     ){}
     
     private checkid(id:string){
@@ -19,9 +16,9 @@ export class JeuxService {
     }
     async createJeux(createJeuxDto: CreateJeuxDto) {
         try{
-            const {name,type} = createJeuxDto;
+            const {nom,type} = createJeuxDto;
             const benevole = new this.jeuxModel({
-            name,
+            nom,
             type});
 
             await benevole.save();
@@ -71,20 +68,5 @@ export class JeuxService {
         return jeux;
     }
 
-    async addToZone(idZone:string,addZoneDto:addZoneDto){
-        this.checkid(addZoneDto._id)
-        if(!isValidObjectId(idZone)){
-            throw new NotFoundException(`No zone with this id: ${idZone}`);
-        }
-        return this.zoneModel.findByIdAndUpdate(
-            idZone,
-            { $addToSet: { jeux: addZoneDto._id } },
-            { new: true },
-          );
-        
-
-      
-        
-    }
-
+  
 }

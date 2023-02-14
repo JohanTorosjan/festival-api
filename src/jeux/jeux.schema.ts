@@ -7,7 +7,7 @@ export type JeuxDocument = HydratedDocument<Jeux>;
 export class Jeux {
     
   @Prop()
-  name: string;
+  nom: string;
 
   @Prop()
   type: string;

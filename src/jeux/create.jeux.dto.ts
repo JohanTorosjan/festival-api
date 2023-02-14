@@ -1,4 +1,4 @@
 export class CreateJeuxDto{
-    name:string;
+    nom:string;
     type:string;
 }

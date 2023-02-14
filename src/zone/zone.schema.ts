@@ -11,7 +11,7 @@ export type ZoneDocument = HydratedDocument<Zone>;
 export class Zone {
     
   @Prop()
-  name: string;
+  nom: string;
 
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref:Jeux.name }] })
   @Type(() => Jeux)

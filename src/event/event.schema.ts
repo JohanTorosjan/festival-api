@@ -18,11 +18,11 @@ export class Event {
     endingdate:Date;
 
     @Prop({ type: mongoose.Schema.Types.ObjectId, ref:Zone.name } )
-    zones:Zone;
+    zone:Zone;
 
     @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref:Benevole.name }]})
     @Type(() => Benevole)
-    benevoles:Benevole;
+    benevoles:[Benevole];
 
 
 }
