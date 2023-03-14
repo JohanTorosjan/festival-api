@@ -1,6 +1,6 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, isValidObjectId } from 'mongoose';
 import { CreateZoneDto } from './zone.create.dto';
 import { Zone, ZoneDocument } from './zone.schema';
 import { AddZoneDto } from './addzone.jeux.dto';
@@ -24,13 +24,34 @@ export class ZoneService {
     }
 
 
+    async updateZone(id: string, createZoneDTO: CreateZoneDto): Promise<Zone> {
+        this.checkid(id)
+        const existingZone = await this.zoneModel.findById(id).exec();
+        if (!existingZone) {
+          throw new NotFoundException(`Zone ${id} not found`);
+        }
+      
+        // Update zone properties
+        if (createZoneDTO.nom) {
+          existingZone.nom = createZoneDTO.nom;
+        }
+        if (createZoneDTO.jeux) {
+          existingZone.jeux = createZoneDTO.jeux;
+        }
+      
+        const updatedZone = await existingZone.save();
+        return updatedZone.toObject({ getters: true });
+    }
+      
+    
+
     addGame(id: string, addZoneDto: AddZoneDto) {
-        let a=this.zoneModel.updateOne(
+        let updated=this.zoneModel.updateOne(
             { _id: id },
             { $push: { jeux: addZoneDto } }
         )
-        console.log(a)
-        return a;
+        console.log(updated)
+        return updated;
 
     }
     
