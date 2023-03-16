@@ -18,7 +18,5 @@ import { EventModule } from './event/event.module';
   JeuxModule,
   ZoneModule,
   EventModule],
-
- 
 })
 export class AppModule {}
