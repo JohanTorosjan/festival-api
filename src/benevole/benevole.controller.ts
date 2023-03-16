@@ -1,4 +1,5 @@
-import { Body,Req, Controller,Get,HttpCode, Param, Post, Put, Delete} from '@nestjs/common';
+import { Body,Req, Controller,Get,HttpCode, Param, Post, Put, Delete, UseGuards} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport/dist';
 import { BenevoleService } from './benevole.service';
 import { CreateBenevoleDTO } from './create.benevole.dto';
 
@@ -21,6 +22,7 @@ export class BenevoleController {
      * Get all the benevoles
      * @returns Benevole[]
      */
+    @UseGuards(AuthGuard('jwt'))
     @Get()
     ReadAll(){
         return this.benevoleService.getAllBenevole()
@@ -31,6 +33,7 @@ export class BenevoleController {
      * @param id the id of the wanted benevole
      * @returns the benevole matching the id, or 404 not found error 
      */
+    @UseGuards(AuthGuard('jwt'))
     @Get(':id')
     getName(@Param('id') id: string) {
         return this.benevoleService.getBenevole(id);
