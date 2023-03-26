@@ -27,11 +27,12 @@ export class BenevoleService {
     async createBenevole(createBenevoleDTO:CreateBenevoleDTO):Promise<Benevole>{
         console.log(createBenevoleDTO)
         try{
-            const {prenom,nom,email} = createBenevoleDTO;
+            const {prenom,nom,email, password} = createBenevoleDTO;
             const benevole = new this.benevoleModel({
             prenom,
             nom,
-            email});
+            email,
+            password});
             await benevole.save();
             return benevole;
             } catch (error) {
@@ -98,5 +99,10 @@ export class BenevoleService {
             return {message:"Success"};
         }
         throw new NotFoundException(`No benevole with this id: ${id}`);
+    }
+
+    async findByEmail(email: string) {
+        const benevole = await this.benevoleModel.findOne({ email }).exec();
+        return benevole;
     }
 }
