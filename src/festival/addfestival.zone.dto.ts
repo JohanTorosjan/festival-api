@@ -1,7 +1,6 @@
 export class AddFestivalDto{
     _id:string;
     nom:string;
-    annee:string;
-    nombreDeJours: number;
+    nombreBenevolesNecessaire:number
     __v:0
 }
