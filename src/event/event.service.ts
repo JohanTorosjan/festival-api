@@ -71,6 +71,10 @@ export class EventService {
         throw new NotFoundException(`No events with this id: ${id}`);
     }
 
+    async deleteAll() {
+        return this.eventModel.deleteMany();
+    }
+
 
 
    async updateEvent(id: string, updateEventDto: CreateEventDto) {

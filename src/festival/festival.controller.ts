@@ -32,6 +32,11 @@ export class FestivalController {
         return this.festivalService.delete(id)
     }
 
+    @Delete()
+    deleteAll(){
+        return this.festivalService.deleteAll();
+    }
+
 
     @Put(':id')
     update(@Param('id') id: string,@Body() updateFestivalDto: CreateFestivalDTO,) {

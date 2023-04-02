@@ -87,6 +87,10 @@ export class BenevoleService {
         throw new InternalServerErrorException();
     }
 
+    async deleteAll() {
+        return this.benevoleModel.deleteMany();
+    }
+
     /**
      * deletes a benevole
      * @param id the id of the benevole to delete

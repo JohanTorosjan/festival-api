@@ -27,6 +27,11 @@ export class EventController {
             return this.eventService.delete(id)
         }
 
+        @Delete()
+        deleteAll(){
+            return this.eventService.deleteAll()
+        }
+
         @Put(':id')
         update(@Param('id') id: string,@Body() updateEventDto: CreateEventDto,) {
             return this.eventService.updateEvent(id, updateEventDto);

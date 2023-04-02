@@ -66,7 +66,10 @@ export class BenevoleController {
         return this.benevoleService.delete(id)
     }
 
-
+    @Delete()
+    deleteAll(){
+        return this.benevoleService.deleteAll();
+    }
 
    
 }

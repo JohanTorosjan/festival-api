@@ -54,6 +54,9 @@ export class JourDeFestivalService {
         throw new NotFoundException(`No jourDeFestivals with this id: ${id}`);
     }
 
+    async deleteAll() {
+        return this.jourDeFestivalModel.deleteMany();
+    }
 
 
    async updateJourDeFestival(id: string, updateJourDeFestivalDto: CreateJourDeFestivalDto) {

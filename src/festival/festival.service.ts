@@ -70,6 +70,10 @@ export class FestivalService {
         return this.festivalModel.find();
     }
 
+    async deleteAll() {
+        return this.festivalModel.deleteMany();
+    }
+
 
     async delete(id:string){
         this.checkid(id)

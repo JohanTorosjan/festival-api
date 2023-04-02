@@ -27,6 +27,11 @@ export class JourDeFestivalController {
             return this.jourDeFestivalService.delete(id)
         }
 
+        @Delete()
+        deleteAll(){
+            return this.jourDeFestivalService.deleteAll();
+        }
+
         @Put(':id')
         update(@Param('id') id: string,@Body() updateJourDeFestivalDto: CreateJourDeFestivalDto,) {
             return this.jourDeFestivalService.updateJourDeFestival(id, updateJourDeFestivalDto);
