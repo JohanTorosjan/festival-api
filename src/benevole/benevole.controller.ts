@@ -1,4 +1,6 @@
 import { Body,Req, Controller,Get,HttpCode, Param, Post, Put, Delete} from '@nestjs/common';
+import { UseGuards } from '@nestjs/common/decorators/core/use-guards.decorator';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { BenevoleService } from './benevole.service';
 import { CreateBenevoleDTO } from './create.benevole.dto';
 
@@ -6,6 +8,13 @@ import { CreateBenevoleDTO } from './create.benevole.dto';
 export class BenevoleController {
 
     constructor(private readonly benevoleService: BenevoleService) {}
+
+    @UseGuards(JwtAuthGuard)
+    @Get('/me')
+    me(@Req() request) {
+        const benevoleEmail = request.user.benevoleEmail;
+        return this.benevoleService.findByEmail(benevoleEmail);
+    }
 
     /**
      * Creates a benevole
@@ -57,7 +66,10 @@ export class BenevoleController {
         return this.benevoleService.delete(id)
     }
 
-
+    @Delete()
+    deleteAll(){
+        return this.benevoleService.deleteAll();
+    }
 
    
 }

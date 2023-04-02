@@ -10,5 +10,6 @@ import { Benevole, BenevoleSchema } from './schemas/benevole.schema';
 ],
     controllers: [BenevoleController],
     providers: [BenevoleService],
+    exports: [BenevoleService]
 })
 export class BenevoleModule {}

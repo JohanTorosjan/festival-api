@@ -3,7 +3,6 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model, isValidObjectId } from 'mongoose';
 import { CreateZoneDto } from './zone.create.dto';
 import { Zone, ZoneDocument } from './zone.schema';
-import { AddZoneDto } from './addzone.jeux.dto';
 
 @Injectable()
 export class ZoneService {
@@ -35,32 +34,15 @@ export class ZoneService {
         if (createZoneDTO.nom) {
           existingZone.nom = createZoneDTO.nom;
         }
-        if (createZoneDTO.jeux) {
-          existingZone.jeux = createZoneDTO.jeux;
-        }
       
         const updatedZone = await existingZone.save();
         return updatedZone.toObject({ getters: true });
     }
-      
-    
-
-    addGame(id: string, addZoneDto: AddZoneDto) {
-        let updated=this.zoneModel.updateOne(
-            { _id: id },
-            { $push: { jeux: addZoneDto } }
-        )
-        console.log(updated)
-        return updated;
-
-    }
     
     async create(createZoneDTO: CreateZoneDto) {
         try{
-            const {nom,jeux} = createZoneDTO;
-            const zone = new this.zoneModel({
-            nom,
-            jeux});
+            const {nom, nombreBenevolesNecessaire} = createZoneDTO;
+            const zone = new this.zoneModel({ nom, nombreBenevolesNecessaire });
 
             await zone.save();
             return zone;
@@ -71,8 +53,14 @@ export class ZoneService {
     }
     
 
-    async getAll(){
-        return this.zoneModel.find().populate('jeux');
+    async getAll():Promise<Zone[]>{
+        try{
+            const allzones = await this. zoneModel.find({});
+            return allzones;
+        }
+        catch(error){
+            throw new InternalServerErrorException();
+        }
     }
 
 

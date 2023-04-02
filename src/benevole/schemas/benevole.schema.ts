@@ -14,6 +14,9 @@ export class Benevole {
 
   @Prop()
   email: string;
+
+  @Prop()
+  password: string;
 }
 
 export const BenevoleSchema = SchemaFactory.createForClass(Benevole);

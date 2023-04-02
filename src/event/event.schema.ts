@@ -11,6 +11,7 @@ export type EventDocument = HydratedDocument<Event>;
 @Schema()
 export class Event {
 
+
     @Prop({ type: Date, required: true })
     beginingdate:Date;
 
@@ -18,6 +19,7 @@ export class Event {
     endingdate:Date;
 
     @Prop({ type: mongoose.Schema.Types.ObjectId, ref:Zone.name } )
+    @Type(() => Zone)
     zone:Zone;
 
     @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref:Benevole.name }]})
