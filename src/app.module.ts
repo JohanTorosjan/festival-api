@@ -22,7 +22,6 @@ import { AuthModule } from './auth/auth.module';
     EventModule,
     FestivalModule,
     JourDeFestivalModule,
-    AuthModule,
   ],
 })
 export class AppModule {}
