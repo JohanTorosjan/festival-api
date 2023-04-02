@@ -3,12 +3,13 @@ import { CreateJourDeFestivalDto } from './jour-de-festival.create.dto';
 import { JourDeFestivalService } from './jour-de-festival.service';
 
 @Controller('jourDeFestival')
-export class JourDeFestivalController {
+export default class JourDeFestivalController {
     constructor(private readonly jourDeFestivalService: JourDeFestivalService){}
 
         @Post()
         Create(@Body()createJourDeFestivalDto:CreateJourDeFestivalDto){
             console.log(createJourDeFestivalDto);
+
             return this.jourDeFestivalService.create(createJourDeFestivalDto)
         }
 
@@ -27,16 +28,19 @@ export class JourDeFestivalController {
             return this.jourDeFestivalService.delete(id)
         }
 
-        @Delete()
-        deleteAll(){
-            return this.jourDeFestivalService.deleteAll();
-        }
-
         @Put(':id')
         update(@Param('id') id: string,@Body() updateJourDeFestivalDto: CreateJourDeFestivalDto,) {
             return this.jourDeFestivalService.updateJourDeFestival(id, updateJourDeFestivalDto);
         }
-    
+
+        @Get('events/:id')
+        getEvents(@Param('id') id:string){
+            return this.jourDeFestivalService.getEvent(id)
+        }
+
+
+        
+
     
 
     
