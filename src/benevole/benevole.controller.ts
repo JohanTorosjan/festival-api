@@ -3,6 +3,7 @@ import { UseGuards } from '@nestjs/common/decorators/core/use-guards.decorator';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { BenevoleService } from './benevole.service';
 import { CreateBenevoleDTO } from './create.benevole.dto';
+import { LoginDto } from '../dto/login.dto';
 
 @Controller('benevole')
 export class BenevoleController {
@@ -71,5 +72,8 @@ export class BenevoleController {
         return this.benevoleService.deleteAll();
     }
 
-   
+    @Post('login')
+    async login(@Req() request, @Body() body: LoginDto) {
+      return this.benevoleService.login(body.email, body.password)
+    }
 }

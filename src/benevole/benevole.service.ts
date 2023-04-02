@@ -109,4 +109,17 @@ export class BenevoleService {
         const benevole = await this.benevoleModel.findOne({ email }).exec();
         return benevole;
     }
+
+    async login(email: string, password: string) {
+        const benevole = await this.findByEmail(email);
+        console.log(benevole);
+        
+        if (!benevole) {
+            return undefined;
+        }
+        if (benevole.password !== password) {
+            return undefined;
+        }
+        return benevole;
+    }
 }

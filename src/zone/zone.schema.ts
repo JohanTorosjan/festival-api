@@ -11,7 +11,7 @@ export class Zone {
   nom: string;
 
   @Prop()
-  nombreBenevolesNecessaire: string;
+  nombreBenevolesNecessaire: number;
 }
 
 export const ZoneSchema = SchemaFactory.createForClass(Zone);
